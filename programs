@@ -1,1 +1,546 @@
+Q1a
+sol
+i.	Press <Esc> and   :w (Saves file and remains in editing mode)
+
+ii.	Press <Esc> and :10w test2.txt
+
+
+iii.	:1,$ s/AI/Artificial Learning/gc
+
+         It prompts replace with fprintf (y/n/a/q/^E/^Y)? to interactively substitute
+
+iv.	Go to the line 5--------5G
+Delete the text into buffer a.-------“add(Current line will be deleted and stored in register a)
+then ----- :w
+: e test2.txt ( To go the test2.txt file)
+Navigate to the desired location in the file test2.txt then press  <Esc> “ ap(Whatever is stored in register a, will be  placed in the desired location)
+To toggle between 2 files test1.txt and text2.txt press [ctrl ^] or   :e#
+
+v.	Go the line number one-------1G
+To move 15 characters right type 15l
+Then go to 3rd line ----3j
+To Move left---2h
+<Esc> rM (to replace)
+:w (To save file)
+
+vi.	:e test2.txt (To go to file test2.txt)
+3 words forward---- 3e
+2 words backward---2b
+Delete the word(X) in the current cursor position.
+Go to the end of the line ---$
+and : w
+
+vii.	To go the file test1.txt--- :e test1.txt
+Go the the line number 1---1G
+Then 2J joins 2 lines with current line.
+
+viii.	Press <Esc> 7G and Press dd, and :wq! ( to saving and exiting vi editor)
+
+
+
+Q1b
+sol
+
+Command
+
+1G  Moves to line 1
+
+2w  Moves to s in stdio.h
+
+i<[Esc]    Inserts <; shows <stdio.h
+
+A>[Esc]    Appends >; shows <stdio.h>
+
+2j      Move two lines below
+
+3svoid[Esc]    Replaces int with void
+
+j2e    Moves to first on next line
+
+r"   Replaces' with "
+
+4w    Moves to 1 in 10
+
+2x    Deletes 10; shows d
+
+a\n[Esc]    Appends \n and a space to d
+
+1     Moves to closing '
+
+r"     Replaces with "
+
+A; [Esc]    Appends; at end of line
+
+j$      Moves to end of next line; at; in exit;
+
+i (1) [Esc]    Inserts (1) after t in exit
+
+o} [Esc]   Opens line below and inserts }
+
+:X    saves and quit
+
+
+Q2a.
+sol
+#!/bin/bash
+echo “ 10 levels of folders  are created for the departments and  10 levels of files created for student details”
+i=1
+while [ $i -le 10 ]
+do
+mkdir MSRITDept$i
+cd MSRITDept$i
+j=1
+while [ $j -le 20 ]
+do
+touch MSRITStudentDetails$j
+j=$(($j+1))
+done
+cd ..
+i=$(($i+1))
+
+done
+
+
+
+Output:
+  # sh 2a.sh
+
+
+Note: Then install tree command:
+#sudo apt install tree
+
+Once the tree command is installed.. Then use tree to display above hierarchical structure of created directories and files.
+
+# tree
+
+Q2b
+sol
+
+
+Shell Script
+
+! /bin/bash
+if [ $# -eq 0 ]
+then
+echo "display does not exit"
+else
+ls -l $1> t1
+x=`cut -d ' ' -f  1,6,7,8,9  t1`
+echo $x
+fi
+
+
+Output:-
+
+# sh 2b.sh 2aa.sh
+-rw-rw-r-- Aug 12 10:55 
+
+
+
+
+
+Q3a
+sol
+Shell script:
+
+#!/bin/bash
+
+for i in $*
+
+  do
+
+    if(-d $i)
+
+      then
+      
+      echo" large filosize size is"
+      
+      echo'ls- lR $1/grep "^-"/tr-5" cut-d " - f S/sort - n/tail-1'
+      
+    else
+
+      echo "not directory"
+fi
+done
+
+
+Q3b
+sol
+# Set the desired file name 
+file_name="example.txt"
+
+# Check if the file exists
+if [ -e "$file_name" ] then
+# If the file exists, rename it and create an empty file with the original name
+echo "File '$file_name' exists."
+
+# Rename the existing file
+mv "$file_name" "${file_name}_old"
+echo "Existing file renamed to '${file_name}_old'."
+
+# Create an empty file with the original name
+touch "$file_name"
+echo "New empty file created with the name '$file_name'."
+
+echo "Both conditions done together." 
+else
+# If the file does not exist, create a new empty file 
+touch "$file_name"
+echo "File '$file_name' does not exist. New empty file created."
+fi
+
+# Additional message to indicate script completion echo "Script execution completed."
+
+Explanation:
+•	#!/bin/bash: This is the shebang line, specifying that the script should be interpreted using the Bash shell.
+•	file_name="example.txt": This line sets the variable file_name to the value "example.txt". This is the name of the file that the script will be working with.
+•	if [ -e "$file_name" ]; then: This line checks if the file specified by file_name exists using the -e test in the if statement.
+•	echo "File '$file_name' exists.": If the file exists, this line prints a message indicating that the file exists.
+•	mv "$file_name" "${file_name}_old": This line renames the existing file by using the mv command. It appends "_old" to the original file name.
+•	echo "Existing file renamed to '${file_name}_old'.": This line prints a message indicating that the existing file has been renamed.
+•	touch "$file_name": This line creates a new empty file with the original name specified by file_name using the touch command.
+ 
+•	echo "New empty file created with the name '$file_name'.": This line prints a message indicating that a new empty file has been created with the original name.
+•	echo "Both conditions done together.": This line prints a message indicating that both conditions (existing file and non-existing file) have been handled together.
+•	else: This part of the script is executed if the file specified by file_name does not exist.
+•	touch "$file_name": This line creates a new empty file with the name specified by file_name.
+•	echo "File '$file_name' does not exist. New empty file created.": This line prints a message indicating that the file did not exist, and a new empty file has been created.
+•	fi: This marks the end of the if statement.
+•	echo "Script execution completed.": This line prints a message indicating that the entire script execution has been completed.
+
+
+
+Output:
+exam@ThinkCentre-M70t:~$ vi prog.sh exam@ThinkCentre-M70t:~$ sh prog.sh
+
+
+File 'example.txt' does not exist. New empty file created. Script execution completed.
+exam@ThinkCentre-M70t:~$ sh prog.sh
+
+File 'example.txt' exists.
+Existing file renamed to 'example.txt_old'.
+New empty file created with the name 'example.txt'. Both conditions done together.
+Script execution completed.
+
+
+
+
+
+Q3c. Set up a cron job for the above developed scripts, that will be execute after every 30 minutes
+
+Give the command crontab –e Press enter
+** * * *  bin/bash    sh 3b.sh
+
+Check the output file created for 1 min gap by deleting already created file. Or
+* * * * * /path/to/3b.sh
+
+
+
+
+
+Q3d). Illustrating shell variables in a shell script
+
+#!/bin/bash
+
+# Define variables
+name="John"
+age=25 
+city="ExampleCity"
+
+# Print values of variables 
+echo "Name: $name" 
+echo "Age: $age"
+echo "City: $city"
+
+# Concatenate variables
+greeting="Hello, my name is $name. I am $age years old, and I live in $city." 
+echo "$greeting"
+
+Q4a
+sol
+#!/bin/bash
+
+# Get system space usage percentage
+space_usage=$(df -h / | awk 'NR==2 {print $5}' | sed 's/%//')
+echo "System Space Usage: $space_usage%"
+# Check if system space usage is greater than 80% 
+if [ "$space_usage" -gt 80 ]; then 
+echo "Low System Space"
+
+# List files greater than 1GB
+echo "Files larger than 1GB:"
+find / -type f -size +1G -exec ls -lh {} \; 2>/dev/null
+fi
+
+
+
+Explanation:
+•	df -h / | awk 'NR==2 {print $5}' | sed 's/%//': This command retrieves the percentage of disk space used on the root filesystem.
+•	if [ "$space_usage" -gt 80 ]; then: This conditional statement checks if the system space usage is greater than 80%.
+•	find / -type f -size +1G -exec ls -lh {} \; 2>/dev/null: This command finds files larger than 1GB and lists them using ls -lh. The 2>/dev/null part suppresses error messages due to permission issues.
+
+
+
+
+4b).Write a shell program to count number of words, characters, white spaces, and special symbols in each text and display the output on standard output. Set a cronjob to execute above script every 3rd day of week morning 9 AM.
+sol
+#!/bin/bash
+
+# Function to count characters, words, white spaces, and special symbols
+count_text_stats() {
+  input_text="$1"
+  char_count=$(echo -n "$input_text" | wc -m)
+  word_count=$(echo "$input_text" | wc -w) 
+  space_count=$(echo "$input_text" | tr -cd ' ' | wc -c) 
+  special_count=$(echo "$input_text" | tr -cd '[:punct:]' | wc -c)
+  
+  echo "Text Analysis Report:" 
+  echo "	"
+  echo "Character count: $char_count" 
+  echo "Word count: $word_count"
+  echo "White space count: $space_count"
+  echo "Special symbol count: $special_count"
+  echo "	"
+}
+
+# Example text (you can replace this with your own text or input)
+text_to_analyze="This is an example text! It contains special symbols, such as @ and #."
+
+# Call the function to analyze the text
+count_text_stats "$text_to_analyze"
+
+# Additional message to indicate script completion
+echo "Script execution completed."
+
+
+C Programs by using UNIX File System Calls
+7. a. Develop a C program to emulate the UNIX ls –li command, which lists
+all the attributes of the files in a specified directory.
+
+Code:
+#include <stdio.h>
+#include <stdlib.h>
+#include <dirent.h>
+#include <sys/stat.h>
+#include <sys/types.h>
+#include <pwd.h>
+#include <grp.h>
+#include <time.h>
+void listFiles(char *path) {
+DIR *dir;
+struct dirent *entry;
+struct stat fileStat;
+// Open the directory
+if ((dir = opendir(path)) == NULL) {
+perror("Error opening directory");
+exit(EXIT_FAILURE);
+}
+// Print header
+printf("%-10s %-8s %-8s %-8s %-12s %s\n", "Permissions", "Links", "Owner", "Group", "Size",
+"Last Modified");
+// Read each entry in the directory
+while ((entry = readdir(dir)) != NULL) {
+// Construct the full path
+char filePath[1024];
+snprintf(filePath, sizeof(filePath), "%s/%s", path, entry->d_name);
+// Get file status
+if (stat(filePath, &fileStat) < 0) {
+perror("Error getting file status");
+exit(EXIT_FAILURE);
+}
+// Get owner and group names
+struct passwd *owner = getpwuid(fileStat.st_uid);
+struct group *group = getgrgid(fileStat.st_gid);
+// Print file attributes
+printf("%s %2lu %-8s %-8s %8ld %s %s\n",
+(S_ISDIR(fileStat.st_mode)) ? "d" : "-",
+fileStat.st_nlink,
+owner->pw_name,
+group->gr_name,
+fileStat.st_size,
+ctime(&fileStat.st_mtime),
+entry->d_name);
+}
+// Close the directory
+closedir(dir);
+}
+int main(int argc, char *argv[]) {
+// Check if the correct number of arguments is provided
+if (argc != 2) {
+fprintf(stderr, "Usage: %s <directory>\n", argv[0]);
+exit(EXIT_FAILURE);
+}
+// Call the function to list files
+listFiles(argv[1]);
+return 0;
+}
+
+
+Compile the above code using gcc command
+Explanation:
+● listFiles function: Opens the specified directory, reads each entry, gets the file status,
+and prints the file attributes in a formatted way.
+● main function: Checks if the correct number of command-line arguments is provided.
+Calls listFiles with the specified directory path.
+● Compile the program and run it by providing the target directory as a command-line
+argument:
+● Assuming you compiled the program and the executable is named a.out, you should run
+it like this:
+./a.out /path/to/directory
+● Replace /path/to/directory with the actual path of the directory you want to list. Make sure
+you provide the directory as a command-line argument. If you are still facing issues,
+please double-check the command and ensure that the specified directory exists.
+
+
+b. Write a C program to remove empty files from the given directory using
+system calls.
+
+Code:
+#include <stdio.h>
+#include <stdlib.h>
+#include <dirent.h>
+#include <sys/stat.h>
+#include <unistd.h>
+void removeEmptyFiles(char *path) {
+DIR *dir;
+struct dirent *entry;
+struct stat fileStat;
+// Open the directory
+if ((dir = opendir(path)) == NULL) {
+perror("Error opening directory");
+exit(EXIT_FAILURE);
+}
+// Read each entry in the directory
+while ((entry = readdir(dir)) != NULL) {
+// Construct the full path
+char filePath[1024];
+snprintf(filePath, sizeof(filePath), "%s/%s", path, entry->d_name);
+// Get file status
+if (stat(filePath, &fileStat) < 0) {
+perror("Error getting file status");
+exit(EXIT_FAILURE);
+}
+// Check if the file is empty and remove it
+if (S_ISREG(fileStat.st_mode) && fileStat.st_size == 0) {
+if (unlink(filePath) == 0) {
+printf("Removed empty file: %s\n", entry->d_name);
+} else {
+perror("Error removing file");
+}
+}
+}
+// Close the directory
+closedir(dir);
+}
+int main(int argc, char *argv[]) {
+// Check if the correct number of arguments is provided
+if (argc != 2) {
+fprintf(stderr, "Usage: %s <directory>\n", argv[0]);
+exit(EXIT_FAILURE);
+}
+// Call the function to remove empty files
+removeEmptyFiles(argv[1]);
+return 0;
+}
+
+Compilation Steps:
+Assuming you save the program in a file named remove_empty_files.c, open a terminal and
+follow these steps:
+1. gcc remove_empty_files.c -o remove_empty_files
+This command uses the GCC compiler to compile the C program and produces an executable
+named remove_empty_files.
+2. ./remove_empty_files /path/to/directory
+Replace /path/to/directory with the actual path of the directory you want to process.
+Explanation:
+● The removeEmptyFiles function opens the specified directory, reads each entry, checks
+if it's a regular file with zero size, and removes it using the unlink system call.
+● The main function checks if the correct number of command-line arguments is provided,
+then calls removeEmptyFiles with the specified directory path.
+● Make sure to run the program with proper permissions to delete files in the specified
+directory.
+
+
+
+5a)Develop an awkscript that accepts date argument in the form of dd-mm-yy
+and display it in the form month, day, and year. The script should check the
+validity of the argument and in the case of error, display a suitable message.
+sol
+{ split ( $0, arr, "-")
+if ((arr[1] < 1) || (arr[1] >31) || (arr[2] < 1) || (arr[2] > 12))
+{
+print "invalid date"
+exit 0
+}
+else {
+{
+Printf “%d”, arr[1]
+if (arr[2] == 1)
+print"Jan"
+if (arr[2] == 2)
+print"Feb"
+if (arr[2]== 3)
+print"March"
+if (arr[2]== 4)
+print"April"
+if (arr[2]== 5)
+print"May"
+if (arr[2]== 6)
+print"jun"
+if (arr[2]== 7)
+print"jul"
+if (arr[2]== 8)
+print"Aug"
+if (arr[2]== 9)
+print"sep"
+if (arr[2]== 10)
+print"oct"
+if (arr[2]== 11)
+print"Nov"
+if (arr[2]== 12)
+print"Dec"
+printf “%d”, arr[3]
+}
+}
+}
+
+Execution
+Awk –f prog5.awk
+2-12-2023
+Output:
+12
+Dec
+2023
+
+
+5b) AWK Develop an awkscript to delete duplicated line from a text file.
+The order of the original lines must remain unchanged
+BEGIN {
+print "Removing Duplicated lines"
+}
+{
+line [++no] = $0
+}
+END {
+for (i=1; i<=no; i++)
+{
+flag=1
+for (j=1; j<i; j++)
+if (line[i] == line[j])
+flag=0
+if (flag==1)
+print line[i] >> "out13a.txt"
+}
+}
+
+
+To execute:
+cat >input.txt
+hello
+hello
+xyz
+awk '!seen[$0]++' input.txt > out13a.txt
+cat out13a.txt
+hello xyz
+
+
 
