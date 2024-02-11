@@ -144,25 +144,17 @@ sol
 Shell script:
 
 #!/bin/bash
-
 for i in $*
+do
+if [ -d $i ]
+then
+        echo "large filename size is"
 
-  do
-
-    if(-d $i)
-
-      then
-      
-      echo" large filosize size is"
-      
-      echo'ls- lR $1/grep "^-"/tr-5" cut-d " - f S/sort - n/tail-1'
-      
-    else
-
-      echo "not directory"
+        echo ls -lR $1 | grep "^-" | tr -s ' ' | cut -d ' ' -f 5 | sort -n | tail -1
+else
+echo "not directory"
 fi
 done
-
 
 Q3b
 sol
