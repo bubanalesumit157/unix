@@ -1,0 +1,131 @@
+11. XML Integration
+Consider the student details given below and create an XML file and save it as
+sample.xml.
+Student Details: -
+SI. No. Student Name USN Department Name
+1. Alex 1RITCS001 CSE
+2. Smith 1RITDS040 DS
+3. Saliena 1RITCV051 Civil
+4. Elizabeth 1RITME011 Mechanical
+Department Details: -
+SI. No. Dept Name Dept Id Total no of enrolled students
+1. CSE 01 170
+2. DS 02 188
+3. Civil 03 160
+4. Mechanical 04 150
+a. From the above XML file, separate only student details and redirect the
+output to a file.
+b. Replacing the tag name from name to Dept name and change globally in a
+shell script.
+c. Read the tag value of USN and redirect the output to standard output as
+well as
+redirect to a file.
+Solution:
+exam@ThinkCentre-M70t:~$ sudo apt-get install xml-twig-tools
+exam@ThinkCentre-M70t:~$ sudo apt-get install xsltproc
+exam@ThinkCentre-M70t:~$ gedit sample.xml
+Source Code:
+<?xml version="1.0" encoding="UTF-8"?>
+<university>
+<students>
+<student>
+<serialNumber>1</serialNumber>
+<DeptName>Alex</DeptName>
+<usn>1RITCS001</usn>
+<deptName>CSE</deptName>
+</student>
+<student>
+<serialNumber>2</serialNumber>
+<DeptName>Smith</DeptName>
+<usn>1RITDS040</usn>
+<deptName>DS</deptName>
+</student>
+<student>
+<serialNumber>3</serialNumber>
+<DeptName>Saliena</DeptName>
+<usn>1RITCV051</usn>
+<deptName>Civil</deptName>
+</student>
+<student>
+<serialNumber>4</serialNumber>
+<DeptName>Elizabeth</DeptName>
+<usn>1RITME011</usn>
+<deptName>Mechanical</deptName>
+</student>
+</students>
+<departments>
+<department>
+<serialNumber>1</serialNumber>
+<DeptName>CSE</DeptName>
+<departmentId>01</departmentId>
+<totalEnrolledStudents>170</totalEnrolledStudents>
+</department>
+<department>
+<serialNumber>2</serialNumber>
+<DeptName>DS</DeptName>
+<departmentId>02</departmentId>
+<totalEnrolledStudents>188</totalEnrolledStudents>
+</department>
+<department>
+<serialNumber>3</serialNumber>
+<DeptName>Civil</DeptName>
+<departmentId>03</departmentId>
+<totalEnrolledStudents>160</totalEnrolledStudents>
+</department>
+<department>
+<serialNumber>4</serialNumber>
+<DeptName>Mechanical</DeptName>
+<departmentId>04</departmentId>
+<totalEnrolledStudents>150</totalEnrolledStudents>
+</department>
+</departments>
+</university>
+exam@ThinkCentre-M70t:~$ cat sample.xml
+exam@ThinkCentre-M70t:~$ xmlstarlet sel -t -c "//student" sample.xml > students.xml
+Command 'xmlstarlet' not found, but can be installed with:
+exam@ThinkCentre-M70t:~$ sudo snap install xmlstarlet # version 1.6.1+pkg-47d2, or
+exam@ThinkCentre-M70t:~$ sudo apt install xmlstarlet # version 1.6.1-2build1
+exam@ThinkCentre-M70t:~$ sudo apt install xmlstarlet # version 1.6.1-2build1
+exam@ThinkCentre-M70t:~$ xmlstarlet sel -t -c "//student" sample.xml > students.xml
+exam@ThinkCentre-M70t:~$ sed -i 's/<name>/<DeptName>/g' sample.xml
+exam@ThinkCentre-M70t:~$ sed -i 's/<\/name>/<\/DeptName>/g' sample.xml
+exam@ThinkCentre-M70t:~$ chmod +x replace_tags.sh
+exam@ThinkCentre-M70t:~$ ls replace_tags.sh
+exam@ThinkCentre-M70t:~$ nano replace_tags.sh
+Copy and Paste the below code:
+#!/bin/bash
+sed -i 's/<name>/<DeptName>/g' sample.xml
+sed -i 's/<\/name>/<\/DeptName>/g' sample.xml
+Press Ctrl + X
+exam@ThinkCentre-M70t:~$ ls
+Desktop eclipse-workspace Public sample.xml Templates
+Documents Music replace_tags.sh snap test
+Downloads Pictures sample students.xml Videos
+exam@ThinkCentre-M70t:~$ chmod +x replace_tags.sh
+exam@ThinkCentre-M70t:~$ ./replace_tags.sh
+exam@ThinkCentre-M70t:~$ xmlstarlet sel -t -v "//usn" sample.xml > usn_values.txt
+exam@ThinkCentre-M70t:~$ cat students.xml
+<student>
+<serialNumber>1</serialNumber>
+<name>Alex</name>
+<usn>1RITCS001</usn>
+<deptName>CSE</deptName>
+</student><student>
+<serialNumber>2</serialNumber>
+<name>Smith</name>
+<usn>1RITDS040</usn>
+<deptName>DS</deptName>
+</student><student>
+<serialNumber>3</serialNumber>
+<name>Saliena</name>
+<usn>1RITCV051</usn>
+<deptName>Civil</deptName>
+</student><student>
+<serialNumber>4</serialNumber>
+<name>Elizabeth</name>
+<usn>1RITME011</usn>
+<deptName>Mechanical</deptName>
+</student>exam@ThinkCentre-M70t:~$ cat usn_values.txt
+1RITCS001
+1RITDS040
+1RITCV051
