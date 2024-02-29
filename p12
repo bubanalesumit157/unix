@@ -1,0 +1,76 @@
+administrator@admin:~$ sudo apt-get update
+[sudo] password for administrator:
+Hit:1 http://security.ubuntu.com/ubuntu jammy-security InRelease
+Hit:2 http://in.archive.ubuntu.com/ubuntu jammy InRelease
+Hit:3 http://in.archive.ubuntu.com/ubuntu jammy-updates InRelease
+Hit:4 http://in.archive.ubuntu.com/ubuntu jammy-backports InRelease
+Reading package lists... Done
+administrator@admin:~$ sudo apt-get install docker.io
+Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+docker.io is already the newest version (24.0.5-0ubuntu1~22.04.1).
+0 upgraded, 0 newly installed, 0 to remove and 201 not upgraded.
+administrator@admin:~$ sudo systemctl enable docker
+administrator@admin:~$ sudo systemctl status docker
+● docker.service - Docker Application Container Engine
+ Loaded: loaded (/lib/systemd/system/docker.service; enabled; vendor preset: enabled)
+ Active: active (running) since Mon 2024-02-19 10:39:52 IST; 2min 21s ago
+TriggeredBy: ● docker.socket
+ Docs: https://docs.docker.com
+ Main PID: 1663 (dockerd)
+ Tasks: 29
+ Memory: 99.1M
+ CPU: 596ms
+ CGroup: /system.slice/docker.service
+ └─1663 /usr/bin/dockerd -H fd:// --containerd=/run/containerd/containerd.sock
+Feb 19 10:39:51 admin dockerd[1663]: time="2024-02-19T10:39:51.918786750+05:30" level=info
+msg="Starting up"
+Feb 19 10:39:51 admin dockerd[1663]: time="2024-02-19T10:39:51.919957523+05:30" level=info
+msg="detected 127.0.0.53 nameserver, assuming systemd-resolved, so using resolv.conf:
+/run/systemd/resolve/reso>
+Feb 19 10:39:51 admin dockerd[1663]: time="2024-02-19T10:39:51.950714941+05:30" level=info
+msg="[graphdriver] using prior storage driver: overlay2"
+Feb 19 10:39:51 admin dockerd[1663]: time="2024-02-19T10:39:51.951294483+05:30" level=info
+msg="Loading containers: start."
+Feb 19 10:39:52 admin dockerd[1663]: time="2024-02-19T10:39:52.518925979+05:30" level=info
+msg="Default bridge (docker0) is assigned with an IP address 172.17.0.0/16. Daemon option --bip
+can be used to >
+Feb 19 10:39:52 admin dockerd[1663]: time="2024-02-19T10:39:52.597010094+05:30" level=info
+msg="Loading containers: done."
+Feb 19 10:39:52 admin dockerd[1663]: time="2024-02-19T10:39:52.622350224+05:30" level=info
+msg="Docker daemon" commit="24.0.5-0ubuntu1~22.04.1" graphdriver=overlay2 version=24.0.5
+Feb 19 10:39:52 admin dockerd[1663]: time="2024-02-19T10:39:52.622639406+05:30" level=info
+msg="Daemon has completed initialization"
+Feb 19 10:39:52 admin dockerd[1663]: time="2024-02-19T10:39:52.660608287+05:30" level=info
+msg="API listen on /run/docker.sock"
+Feb 19 10:39:52 admin systemd[1]: Started Docker Application Container Engine.
+lines 1-22/22 (END)
+[1]+ Stopped sudo systemctl status docker
+administrator@admin:~$ sudo service docker start
+administrator@admin:~$ sudo systemctl start docker
+administrator@admin:~$ sudo docker run hello-world
+Unable to find image 'hello-world:latest' locally
+latest: Pulling from library/hello-world
+c1ec31eb5944: Pull complete
+Digest: sha256:d000bc569937abbe195e20322a0bde6b2922d805332fd6d8a68b19f524b7d21d
+Status: Downloaded newer image for hello-world:latest
+Hello from Docker!
+This message shows that your installation appears to be working correctly.
+To generate this message, Docker took the following steps:
+1. The Docker client contacted the Docker daemon.
+2. The Docker daemon pulled the "hello-world" image from the Docker Hub.
+ (amd64)
+3. The Docker daemon created a new container from that image which runs the
+ executable that produces the output you are currently reading.
+4. The Docker daemon streamed that output to the Docker client, which sent it
+ to your terminal.
+To try something more ambitious, you can run an Ubuntu container with:
+$ docker run -it ubuntu bash
+Share images, automate workflows, and more with a free Docker ID:
+https://hub.docker.com/
+For more examples and ideas, visit:
+https://docs.docker.com/get-started/
+administrator@admin:~$ vi myscript.sh
+administrator@admin:~$ sh myscript.sh
+Hello, Docker! Argument passed:
